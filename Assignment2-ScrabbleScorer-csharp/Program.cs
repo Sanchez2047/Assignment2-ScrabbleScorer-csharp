@@ -22,6 +22,7 @@ namespace Assignment2_ScrabbleScorer_csharp
             {8, "J, X" },
             {10, "Q, Z" }
         };
+        public static Dictionary<string, int> newPointStructure = Transform();
 
 
 
@@ -30,10 +31,11 @@ namespace Assignment2_ScrabbleScorer_csharp
         public static Dictionary<string,int> Transform()
         {
             Dictionary<string, int> newDict = new Dictionary<string, int>();
+
             foreach (var line in oldPointStructure)
             {
-                (line.Value).ToLower();
-                string[] letters = line.Value.Split(", ");
+                string lowerLetters = (line.Value).ToLower();
+                string[] letters = lowerLetters.Split(", ");
                 foreach (string letter in letters)
                 {
                     newDict.Add(letter, line.Key);
@@ -98,8 +100,13 @@ namespace Assignment2_ScrabbleScorer_csharp
 
         static void Main(string[] args)
         {
+
             //InitialPrompt();
-            Transform();
+            foreach (var line in newPointStructure)
+            {
+                Console.WriteLine($"{line.Key} - {line.Value}");
+            }
+
             //Console.WriteLine("Please enter Letter: ");
             //string input = (Console.ReadLine().ToUpper());
             //foreach (var point in oldPointStructure)
