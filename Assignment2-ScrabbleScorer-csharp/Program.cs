@@ -5,6 +5,12 @@ namespace Assignment2_ScrabbleScorer_csharp
 {
     class Program
     {
+        public static Dictionary<int, string> scoring = new Dictionary<int, string>()
+        {
+            {1, "Scrabble: The traditional scoring algorithm." },
+            {2, "Simple Score: Each letter is worth 1 point." },
+            {3, "Bonus Vowels: Vowels are worth 3 pts, and consonants are 1 pt." },
+        };
         //Here is the original OldPointStructure dictionay
         public static Dictionary<int, string> oldPointStructure = new Dictionary<int, string>()
         {
@@ -54,7 +60,13 @@ namespace Assignment2_ScrabbleScorer_csharp
 
 
         //Code your InitialPrompt method here
+        public static int InitialPrompt()
+        {
 
+            Console.WriteLine("Welcome to the Scrabble score calculator");
+
+
+        }
 
 
 
