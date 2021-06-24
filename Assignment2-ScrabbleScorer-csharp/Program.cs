@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Assignment2_ScrabbleScorer_csharp
 {
@@ -22,15 +23,11 @@ namespace Assignment2_ScrabbleScorer_csharp
             {8, "J, X" },
             {10, "Q, Z" }
         };
-        public static Dictionary<string, int> newPointStructure = Transform();
-
-
-
-
+        public static Dictionary<char, int> newPointStructure = Transform();
         //Code your Transform method here
-        public static Dictionary<string,int> Transform()
+        public static Dictionary<char,int> Transform()
         {
-            Dictionary<string, int> newDict = new Dictionary<string, int>();
+            Dictionary<char, int> newDict = new Dictionary<char, int>();
 
             foreach (var line in oldPointStructure)
             {
@@ -38,41 +35,71 @@ namespace Assignment2_ScrabbleScorer_csharp
                 string[] letters = lowerLetters.Split(", ");
                 foreach (string letter in letters)
                 {
-                    newDict.Add(letter, line.Key);
+
+                    newDict.Add(char.Parse(letter), line.Key);
                 }
             }
             return newDict;
         }
-
-
-
-
-
         //Code your Scoring Option methods here
 
         //SimpleScorer-----
-        public static void SimpleScorer()
+        public static void SimpleScorer(string word)
         {
-
+            char[] letters = word.ToCharArray();
+            Console.WriteLine($"Your word: {word} is worth {letters.Length} points");
         }
-
-
         //BonusVowels-----
-
-
-
-
+        public static void BonusVowels(string word)
+        {
+            string lowerWord = word.ToLower();
+            List<int> vowels = new List<int> { 'a', 'e', 'i', 'o', 'u' };
+            char[] letters = lowerWord.ToCharArray();
+            List<int> score = new List<int>();
+            List<int> consonant = new List<int>();
+            foreach (char letter in letters)
+            {           
+                if (vowels.Contains(letter))
+                {
+                    score.Add(3);
+                }
+                else
+                {
+                    consonant.Add(letter);
+                }     
+            }
+            int finalScore = score.Sum() + consonant.Count;
+            Console.WriteLine($"Your word: {word} is worth {finalScore} points");
+        }
         //ScrabbleScorer-----
-
-
-
-
-
+        public static void ScrabbleScorer(string word)
+        {
+            string lowerWord = word.ToLower();
+            char[] letters = lowerWord.ToCharArray();
+            List<int> score = new List<int>();
+            foreach (char letter in letters)
+            {
+                score.Add(newPointStructure[letter]);
+            }
+            int finalScore = score.Sum();
+            Console.WriteLine($"Your word: {word} is worth {finalScore} points");
+        }
         //Code your ScoringAlgorithms method here
-
-
-
-
+        public static void ScoringAlgorithms(int number)
+        {
+            if (InitialPrompt() == 2)
+            {
+                BonusVowels(RunProgram());
+            }
+            else if (InitialPrompt() == 3)
+            {
+                ScrabbleScorer(RunProgram());
+            }
+            else
+            {
+                SimpleScorer(RunProgram());
+            }
+        }
 
         //Code your InitialPrompt method here
         public static int InitialPrompt()
@@ -92,7 +119,12 @@ namespace Assignment2_ScrabbleScorer_csharp
 
 
         //Code your RunProgram method here
-
+        public static string RunProgram()
+        {
+            Console.WriteLine("Enter a word to be scored, or \"Stop\" to quit: ");
+            string userWord = Console.ReadLine();
+            return userWord;
+        }
 
 
 
@@ -102,12 +134,10 @@ namespace Assignment2_ScrabbleScorer_csharp
         {
 
             //InitialPrompt();
-            foreach (var line in newPointStructure)
-            {
-                Console.WriteLine($"{line.Key} - {line.Value}");
-            }
+            string rung = RunProgram();
 
-            //Console.WriteLine("Please enter Letter: ");
+            Console.WriteLine("Please enter word: ");
+            ScrabbleScorer(Console.ReadLine());
             //string input = (Console.ReadLine().ToUpper());
             //foreach (var point in oldPointStructure)
             //{
