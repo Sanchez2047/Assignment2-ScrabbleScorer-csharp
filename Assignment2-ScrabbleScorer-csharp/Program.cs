@@ -15,6 +15,7 @@ namespace Assignment2_ScrabbleScorer_csharp
         //Here is the original OldPointStructure dictionay
         public static Dictionary<int, string> oldPointStructure = new Dictionary<int, string>()
         {
+            {0, " " },
             {1, "A, E, I, O, U, L, N, R, S, T"},
             {2, "D, G"},
             {3, "B, C, M, P" },
@@ -90,7 +91,6 @@ namespace Assignment2_ScrabbleScorer_csharp
         //Code your ScoringAlgorithms method here
         public static void ScoringAlgorithms(int number)
         {
- ;
             if (userInput == 2)
             {
                 SimpleScorer(userWord);
@@ -114,7 +114,12 @@ namespace Assignment2_ScrabbleScorer_csharp
                 Console.WriteLine($"{line.Key} - {line.Value}");
             }
             Console.WriteLine("\nEnter 1, 2, or 3");
-            userInput = Int32.Parse(Console.ReadLine());
+            bool success =Int32.TryParse(Console.ReadLine(), out userInput);
+            while (success == false || userInput > 3 || userInput <= 0)
+            {
+                Console.WriteLine("Please enter in only numbers 1, 2, or 3");
+                success = Int32.TryParse(Console.ReadLine(), out userInput);
+            }
             return userInput;
 
         }
