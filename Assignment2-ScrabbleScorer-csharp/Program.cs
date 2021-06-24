@@ -93,15 +93,15 @@ namespace Assignment2_ScrabbleScorer_csharp
  ;
             if (userInput == 2)
             {
-                BonusVowels(userWord);
+                SimpleScorer(userWord);
             }
             else if (userInput == 3)
             {
-                ScrabbleScorer(userWord);
+                BonusVowels(userWord);
             }
             else
             {
-                SimpleScorer(userWord);
+                ScrabbleScorer(userWord);
             }
         }
         //Code your InitialPrompt method here
@@ -122,15 +122,14 @@ namespace Assignment2_ScrabbleScorer_csharp
         public static int RunProgram()
         {
             userInput = InitialPrompt();
-            Console.WriteLine("Enter a word to be scored, or \"Stop\" to quit: ");
+            Console.WriteLine("Enter a word to be scored, or \"STOP\" to quit: ");
             userWord = Console.ReadLine();
-            while (userWord != "Stop")
+            while (userWord != "STOP")
             {
                 ScoringAlgorithms(userInput);
-                Console.WriteLine("Enter a word to be scored, or \"Stop\" to quit: ");
+                Console.WriteLine("Enter a word to be scored, or \"STOP\" to quit: ");
                 userWord = Console.ReadLine();
             }
-            Console.ReadLine();
             return userInput;
         }
         static void Main(string[] args)
