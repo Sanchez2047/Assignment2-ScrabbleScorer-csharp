@@ -27,7 +27,20 @@ namespace Assignment2_ScrabbleScorer_csharp
 
 
         //Code your Transform method here
-
+        public static Dictionary<string,int> Transform()
+        {
+            Dictionary<string, int> newDict = new Dictionary<string, int>();
+            foreach (var line in oldPointStructure)
+            {
+                (line.Value).ToLower();
+                string[] letters = line.Value.Split(", ");
+                foreach (string letter in letters)
+                {
+                    newDict.Add(letter, line.Key);
+                }
+            }
+            return newDict;
+        }
 
 
 
@@ -85,7 +98,17 @@ namespace Assignment2_ScrabbleScorer_csharp
 
         static void Main(string[] args)
         {
-            InitialPrompt();
+            //InitialPrompt();
+            Transform();
+            //Console.WriteLine("Please enter Letter: ");
+            //string input = (Console.ReadLine().ToUpper());
+            //foreach (var point in oldPointStructure)
+            //{
+            //    if (point.Value.Contains(input))
+            //    {
+            //        Console.WriteLine(point.Key);
+            //    }
+            //}
             //Call your RunProgram method here
 
 
