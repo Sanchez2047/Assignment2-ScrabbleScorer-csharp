@@ -23,6 +23,9 @@ namespace Assignment2_ScrabbleScorer_csharp
             {8, "J, X" },
             {10, "Q, Z" }
         };
+        public static int userInput;
+        public static string userWord;
+
         public static Dictionary<char, int> newPointStructure = Transform();
         //Code your Transform method here
         public static Dictionary<char,int> Transform()
@@ -87,20 +90,20 @@ namespace Assignment2_ScrabbleScorer_csharp
         //Code your ScoringAlgorithms method here
         public static void ScoringAlgorithms(int number)
         {
-            if (InitialPrompt() == 2)
+ ;
+            if (userInput == 2)
             {
-                BonusVowels(RunProgram());
+                BonusVowels(userWord);
             }
-            else if (InitialPrompt() == 3)
+            else if (userInput == 3)
             {
-                ScrabbleScorer(RunProgram());
+                ScrabbleScorer(userWord);
             }
             else
             {
-                SimpleScorer(RunProgram());
+                SimpleScorer(userWord);
             }
         }
-
         //Code your InitialPrompt method here
         public static int InitialPrompt()
         {
@@ -111,48 +114,28 @@ namespace Assignment2_ScrabbleScorer_csharp
                 Console.WriteLine($"{line.Key} - {line.Value}");
             }
             Console.WriteLine("\nEnter 1, 2, or 3");
-            int userInput = Int32.Parse(Console.ReadLine());
+            userInput = Int32.Parse(Console.ReadLine());
             return userInput;
 
         }
-
-
-
         //Code your RunProgram method here
-        public static string RunProgram()
+        public static int RunProgram()
         {
+            userInput = InitialPrompt();
             Console.WriteLine("Enter a word to be scored, or \"Stop\" to quit: ");
-            string userWord = Console.ReadLine();
-            return userWord;
+            userWord = Console.ReadLine();
+            while (userWord != "Stop")
+            {
+                ScoringAlgorithms(userInput);
+                Console.WriteLine("Enter a word to be scored, or \"Stop\" to quit: ");
+                userWord = Console.ReadLine();
+            }
+            Console.ReadLine();
+            return userInput;
         }
-
-
-
-
-
         static void Main(string[] args)
         {
-
-            //InitialPrompt();
-            string rung = RunProgram();
-
-            Console.WriteLine("Please enter word: ");
-            ScrabbleScorer(Console.ReadLine());
-            //string input = (Console.ReadLine().ToUpper());
-            //foreach (var point in oldPointStructure)
-            //{
-            //    if (point.Value.Contains(input))
-            //    {
-            //        Console.WriteLine(point.Key);
-            //    }
-            //}
-            //Call your RunProgram method here
-
-
-
-
-
-            Console.ReadLine();
+            RunProgram();
         }
     }
 }
