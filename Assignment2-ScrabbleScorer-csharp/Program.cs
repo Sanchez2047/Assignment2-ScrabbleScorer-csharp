@@ -63,12 +63,16 @@ namespace Assignment2_ScrabbleScorer_csharp
         public static int InitialPrompt()
         {
 
-            Console.WriteLine("Welcome to the Scrabble score calculator");
-
+            Console.WriteLine("Welcome to the Scrabble score calculator\n");
+            foreach (var line in scoring)
+            {
+                Console.WriteLine($"{line.Key} - {line.Value}");
+            }
+            Console.WriteLine("\nEnter 1, 2, or 3");
+            int userInput = Int32.Parse(Console.ReadLine());
+            return userInput;
 
         }
-
-
 
 
 
@@ -81,13 +85,14 @@ namespace Assignment2_ScrabbleScorer_csharp
 
         static void Main(string[] args)
         {
+            InitialPrompt();
             //Call your RunProgram method here
 
 
 
 
 
-
+            Console.ReadLine();
         }
     }
 }
